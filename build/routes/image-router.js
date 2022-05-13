@@ -27,7 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const image_controller = __importStar(require("../controlers/image-controller"));
+const image_controller = __importStar(require("../controllers/image-controller"));
 const image = express_1.default.Router();
-image.get("/image", image_controller.display_image);
+image.get('/image', image_controller.display_image);
 exports.default = image;

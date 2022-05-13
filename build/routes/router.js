@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const image_router_1 = __importDefault(require("./image-router"));
 const router = express_1.default.Router();
 router.get('/', (req, res) => {
-    res.send("Home Page");
+    res.send('Home Page');
 });
 router.use('/api', image_router_1.default);
 exports.default = router;

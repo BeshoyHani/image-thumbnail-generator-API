@@ -14,3 +14,4 @@ app.use(router_1.default);
 app.listen(PORT, () => {
     console.log('Server is running.');
 });
+exports.default = app;
