@@ -15,14 +15,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const index_1 = __importDefault(require("../index"));
 const request = (0, supertest_1.default)(index_1.default);
-describe("Image Endpoint Testing", () => {
-    it("Resize Image with 150x150", () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.get("/api/image?filename=encenadaport&w=300&h=250");
+describe('Image Endpoint Testing', () => {
+    it('Resize Image without specify extention with 150x150', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.get('/api/image?filename=encenadaport&w=300&h=250');
         expect(response.status).toBe(200);
-        expect(response.headers["content-type"]).toBe("image/jpeg");
+        expect(response.headers['content-type']).toBe('image/jpeg');
     }));
-    it("Send Request With Missing Parameter", () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.get("/api/image?filename=encenadaport&w=300");
+    it('Resize Image with png extension', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.get('/api/image?filename=encenadaport.png&w=300&h=250');
+        expect(response.status).toBe(200);
+        expect(response.headers['content-type']).toBe('image/png');
+    }));
+    it('Resize Image with gif extension', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.get('/api/image?filename=giphy.gif&w=300&h=250');
+        expect(response.status).toBe(200);
+        expect(response.headers['content-type']).toBe('image/gif');
+    }));
+    it('Send Request With Missing Parameter', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.get('/api/image?filename=encenadaport&w=300');
         expect(response.status).toBe(400);
+    }));
+    it('Try to access page that not found', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.get('/api');
+        expect(response.status).toBe(404);
     }));
 });
