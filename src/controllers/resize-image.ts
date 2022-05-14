@@ -16,7 +16,7 @@ function check_parameters(
     return true;
 }
 
-const does_img_exists = async (path: string) => {
+const does_img_exists = async (path: string): Promise<boolean> => {
     try {
         await fs.access(path);
         return true;
@@ -44,19 +44,19 @@ function get_image_full_name(image: string): string {
     return image;
 }
 
-const get_image_type = (image_name: string) => {
+const get_image_type = (image_name: string): string => {
     const type = image_name.split('.')[1];
     return type == 'jpg' ? 'jpeg' : type;
 };
 
-const read_image = (image: string) => fs.readFile(image);
+const read_image = (image: string): Promise<Buffer> => fs.readFile(image);
 
 function resize_image(
     image: Buffer,
     width: number,
     height: number,
     out_path: string
-) {
+): Promise<Buffer> {
     return sharp(image)
         .resize(width, height)
         .toFile(out_path, error => {

@@ -4,7 +4,7 @@ import * as resizer from './resize-image';
 const ASSETS_Full_PATH = './assets/full/';
 const ASSETS_THUMB_PATH = './assets/thumb/';
 
-const display_image = async (req: Request, res: Response) => {
+const display_image = async (req: Request, res: Response): Promise<void> => {
     let image: string = req.query.filename as string;
     const width = +(req.query.w as unknown as number);
     const height = +(req.query.h as unknown as number);

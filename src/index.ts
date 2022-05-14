@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(router);
-app.listen(PORT, () => {
+app.listen(PORT, (): void => {
     console.log('Server is running.');
 });
 
