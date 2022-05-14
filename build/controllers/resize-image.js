@@ -66,6 +66,8 @@ function resize_image(image, width, height, out_path) {
         }
     })
         .toBuffer()
-        .then(new_image => { return new_image; });
+        .then(new_image => {
+        return new_image;
+    });
 }
 exports.resize_image = resize_image;
