@@ -16,28 +16,28 @@ const display_image = async (req: Request, res: Response): Promise<void> => {
         const image_type: string = resizer.get_image_type(image);
 
         const thumb_image = resizer.get_thumb_expression(image, width, height);
-        let path = ASSETS_THUMB_PATH + thumb_image;
-        const thumb_exists: boolean = await resizer.does_img_exists(path);
+        const thumb_path = ASSETS_THUMB_PATH + thumb_image;
+        const thumb_exists: boolean = await resizer.does_img_exists(thumb_path);
 
         if (thumb_exists) {
-            const img = await resizer.read_image(path);
+            const img = await resizer.read_image(thumb_path);
             res.writeHead(200, { 'Content-Type': `image/${image_type}` }).end(
                 img
             );
         } else {
-            path = ASSETS_Full_PATH + image;
+            const original_path = ASSETS_Full_PATH + image;
             const original_exists: boolean = await resizer.does_img_exists(
-                path
+                original_path
             );
             if (!original_exists) {
                 throw new Error('Oops! The Specified image does not exist');
             }
-            const img = await resizer.read_image(path);
+            const img = await resizer.read_image(original_path);
             const new_image = await resizer.resize_image(
                 img,
                 width,
                 height,
-                thumb_image
+                thumb_path
             );
             res.writeHead(200, { 'Content-Type': `image/${image_type}` }).end(
                 new_image
