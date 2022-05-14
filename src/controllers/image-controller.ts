@@ -11,7 +11,7 @@ const display_image = async (req: Request, res: Response): Promise<void> => {
 
     try {
         resizer.check_parameters(image, width, height);
-
+        
         image = resizer.get_image_full_name(req.query.filename as string);
         const image_type: string = resizer.get_image_type(image);
 
